@@ -1,3 +1,4 @@
+#Case Study I
 #1.Write a program to compute the distance current position after sequence of movements
 import math
 class robot():
@@ -118,3 +119,193 @@ def fact(n):
 
 factorial=fact(number)
 print(factorial)
+
+#8.Write a program that calculates and prints the value according to the given formula
+import math
+
+def calfor(n):
+    num = (2 * 50 * n)
+    Q = math.sqrt(num / 30)
+    return int(Q)
+
+seq = []
+inp = input("Enter the Sequence: ")
+x = inp.split(",")
+for i in x:
+    if (i != ","):
+        seq.append(calfor(int(i)))
+
+print(seq)
+
+#9.Write a program which takes 2 digits, X,Y as input and generates a 2-dimensional array
+import numpy as np
+
+X=int(input("Enter the size of rows: "))
+Y=int(input("Enter the size of columns: "))
+arr=np.zeros((X, Y))
+for i in range(0,X):
+    for j in range(0,Y):
+        arr[i][j]=i*j
+print(arr)
+
+#10.Write a program that accepts a comma separated sequence of words as input and prints the words in a comma-separated sequence after sorting them alphabetically
+words=(input("Enter the sequence of words seperated by comma :"))
+print("Before sorting: ",words)
+afterSort= ""
+for i in sorted(words.split(",")):
+    if afterSort == "":
+        afterSort=afterSort+i
+    else:
+        afterSort=afterSort+","+i
+print("After Sorting: ",afterSort)
+
+#11.Write a program that accepts sequence of lines as input and prints the lines after making all characters in the sentence capitalized.
+print("Enter the sequence of lines:")
+inputline=""
+outputline=""
+while True:
+    inputline=input()
+    if inputline:
+        outputline = outputline+inputline.upper()+"\n"
+    else:
+        break
+print("The sequence after changing case:")
+print(outputline)
+
+#12.Write a program that accepts a sequence of whitespace separated words as input and   prints   the   words   after   removing   all   duplicate   words   and   sorting   them alphanumerically.
+rawString=input("Enter the string with whitespace :")
+removeDup=""
+for i in rawString.split(" "):
+    if i not in removeDup:
+        removeDup= removeDup+i+" "
+print("After removing duplicates: ",removeDup)
+afterSort=""
+for i in sorted(removeDup.split(" ")):
+    if afterSort == "":
+        afterSort=afterSort+i
+    else:
+        afterSort=afterSort+" "+i
+print("After Sorting: ",afterSort)
+
+#13.Write  a  program  which  accepts  a  sequence  of  comma  separated  4  digit  binary numbers  as  its  input  and  then  check  whether  they  are  divisible  by  5  or  not.  The numbers that are divisible by 5 are to be printed in a comma separated sequence.
+SeqNum=input("Enter the string with whitespace :")
+finalSeq=""
+for i in SeqNum.split(","):
+    if int(i,2)%5 ==0:
+        if finalSeq == "":
+            finalSeq=finalSeq+i
+        else:
+            finalSeq=finalSeq+","+i
+
+print(finalSeq)
+
+#14.Write  a  program  that  accepts  a  sentence  and  calculate  the  number  of  upper  case letters and lower case letters.
+sentence=input("Enter the string : ")
+uc=0
+lc=0
+for i in sentence:
+    if i.isupper():
+        uc=uc+1
+    elif i.islower():
+        lc=lc+1
+
+print("UPPER CASE ",uc)
+print("LOWER CASE ",lc)
+
+#15.Give example of fsum and sum function of math library.
+import math
+numbers=[1,2,3,4,5,6,7,8,9,10]
+s=sum(numbers)
+fs=math.fsum(numbers)
+print(s,fs)
+
+#============================================================================================
+#Case Study II
+
+import sys
+
+#1.Read file bank-data.csv
+file=open("bank-data.csv","r")
+
+#2.Build a set of unique jobs
+age=[]
+job=[]
+maritial=[]
+for x in file:
+    if "age" not in x:
+        i=x.split(",")
+        age.append(i[0])
+        i[1]=i[1].strip('.')
+        job.append(i[1])
+        maritial.append(i[2])
+ujobs=[]
+for i in job:
+    if i not in ujobs:
+        ujobs.append(i)
+print("The unique jobs are",ujobs)
+
+#3.Read the input from command line –profession
+#profession=sys.argv[1] #Enable this line for taking command line arguments
+profession = "admin"
+
+#4.Check if  profession is in list
+if profession.lower() in ujobs:
+#5.Print  whether client is eligible
+    print("The profession is in the unique set, hence client is eligible")
+else:
+    print("The profession is not in the unique set, hence client is not eligible")
+
+#1.Compute max and min age for loan eligibility based on data in csv file
+#2.Store max and min age in dictionary
+agedict={'minage':min(age),'maxage':max(age)}
+print("The minimum age for loan eligibilty is :" ,agedict['minage'])
+print("The maximum age for loan eligibilty is :" ,agedict['maxage'])
+
+#3.Make the profession check case insensitive
+#if profession.lower() in ujobs:
+#already case insensitive
+
+#============================================================================================
+#Case Study III
+
+
+import re
+from Customer import Customer
+
+
+class Error(Exception):
+    """CustomerNotAllowedException"""
+    pass
+
+class CustomerNotAllowedException(Error):
+    pass
+#1.Read FairDealCustomerData.css
+file=open("FairDealCustomerData.csv","r")
+
+#2.Name field contains full name –use regular expression to separate title, first name, last name
+def createOrder(x):
+    out = re.search(r"(.*),\s(.*)\.\s(.*),([0-9])", x)
+    c = Customer()
+    c.setLname(out.group(1))
+    c.setTitle(out.group(2))
+    c.setFname(out.group(3))
+    c.setIsblacklisted(out.group(4))
+    return c
+
+#3.Store the data in Customer Class
+for x in file:
+    cust=createOrder(x)
+    try:
+#4.Create Custom Exception –CustomerNotAllowedException
+        if int(cust.isblacklisted) == 1:
+#5.Pass a customer to function "createOrder" and throw CustomerNotAllowedException in case of blacklisted value is 1
+            raise CustomerNotAllowedException
+    except CustomerNotAllowedException:
+        print("The customer is not allowed!!!!!!!!!!", cust.__str__())
+
+    print("Order created Successfully for customer",cust.__str__())
+
+
+
+
+
