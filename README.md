@@ -1,2 +1,2 @@
 # PythonDS
-This Repoitory contains my practice programs.
+This Repository contains my practice programs.
