@@ -111,3 +111,74 @@ s=pd.Series(['12', '-$10', '$10,000'])
 l=s.replace(regex=r'\$',value='')
 print(l)
 #6.6:-Create a series and reverse all lower case words'india 1998', 'big country', np.nan
+import pandas as pd
+import numpy as np
+s=pd.Series(['india 1998', 'big country', np.nan])
+replaceValue=lambda m:m.group(0)[::-1]
+l=s.str.replace(r'[a-z]+',replaceValue)
+print(l)
+#6.7: Create pandas series and print true if value is alphanumeric in series or false if value is not alpha numeric in series.'1', '2', '1a', '2b', '2003c'
+import pandas as pd
+import numpy as np
+s=pd.Series(['1', '2', '1a', '2b', '2003c'])
+print(s.str.isalnum())
+#6.8: Create pandas series and print true if value is containing ‘A’'1', '2', '1a', '2b', 'America', 'VietnAm','vietnam', '2003c
+import pandas as pd
+import numpy as np
+s=pd.Series(['1', '2', '1a', '2b', 'America', 'VietnAm','vietnam', '2003c'])
+print(s.str.contains('A'))
+#6.9: Create pandas series and print in three columns value 0 or 1 is a or b or c exists in values'a', 'a|b', np.nan, 'a|c'
+import pandas as pd
+import numpy as np
+s=pd.Series(['a', 'a|b', np.nan, 'a|c'])
+print(s.str.get_dummies())
+#6.10: Create pandas dataframe having keys and ltable and rtable as below -'key': ['One', 'Two'], 'ltable': [1, 2]'key': ['One', 'Two'], 'rtable': [4, 5]Merge both the tables based of key
+import pandas as pd
+import numpy as np
+df1=pd.DataFrame({'key': ['One', 'Two'], 'ltable': [1, 2]})
+df2=pd.DataFrame({'key': ['One', 'Two'], 'rtable': [4, 5]})
+mdf=pd.merge(df1,df2,on='key')
+print(mdf)
+
+#============================================================================================
+#Case Study II
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('/Users/prateekb/Downloads/PythonPractice/Machine Learning/Salaries.csv')
+#1.Compute how much total salary cost has increased from year 2011 to 2014
+s2011=df[df['Year']==2011]
+print(s2011['TotalPayBenefits'].sum())
+s2014=df[df['Year']==2014]
+print(s2014['TotalPayBenefits'].sum())
+diff=(s2014['TotalPayBenefits'].sum())-(s2011['TotalPayBenefits'].sum())
+print("The salary cost increases to {} from 2011 to 2014".format(diff))
+
+#2.Which Job Title in Year 2014 has highest mean salary?
+smean=df.groupby('JobTitle').mean()
+hjt=smean[smean['TotalPayBenefits']==smean['TotalPayBenefits'].max()]
+for i,j in hjt['TotalPayBenefits'].iteritems():
+    print("The job title {} has the highest salary mean of {}".format(i,j))
+
+#3.How much money could have been saved in Year 2014 by stopping OverTimePay?
+s2014=df[df['Year']==2014]
+print("The money saved by stopping overtime pay is {}".format(s2014['OvertimePay'].sum()))
+#4.Which are the top 5 common job in Year 2014 and how much do they cost SFO ?
+s2014=df[df['Year']==2014]
+top5jobs=s2014['JobTitle'].value_counts().head(5)
+topjobs=[]
+for i,j in top5jobs.iteritems():
+    topjobs.append(i)
+totalSal=s2014.groupby('JobTitle').sum()
+cost=0
+for i,j in totalSal['TotalPayBenefits'].iteritems():
+    if(i in topjobs):
+        cost=cost+j
+print("The cost for 5 common jobs in 2014 to SFO is = ",cost)
+#5.Who was the top earning employee across all the years?
+totalSal=df.groupby('EmployeeName').sum()
+#print(totalSal.sort_values(by='TotalPayBenefits',ascending=False))
+hjt=totalSal[totalSal['TotalPayBenefits']==totalSal['TotalPayBenefits'].max()]
+for i,j in hjt['TotalPayBenefits'].iteritems():
+    print("The highest salaried employee is {} with salary mean of {}".format(i,j))
