@@ -82,3 +82,60 @@ for i in f.read().split("\n"):
     f.write("Hello " + i + ",\n")
     f.write(body)
     f.close()
+
+#============================================================================================
+#Case Study II
+
+#1.Display first 100 records from the data and play with parameters -tiles, zoom_start etc. Map will be saved in BasicWebMap.html –view it in browser
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import folium
+df=pd.read_csv("/Users/prateekb/Downloads/PythonPractice/Machine Learning/Police_Department_Incidents_Year_2016_.csv")
+map=folium.Map(location=[37.775421, -122.403405],zoom_start=12,tiles="OpenStreetMap")
+fg=folium.FeatureGroup(name="My Map")
+for i in range(0,99):
+    fg.add_child(folium.Marker(location=[df['Y'][i],df['X'][i]],popup=df['Address'][i],icon=folium.Icon(color="green")))
+
+map.add_child(fg)
+map.save("BasicWebMap.html")
+
+#2.For latest 7 days of data create WebMap of Crimes which are categorized as ROBBERY
+rob=df[df['Category']=="ROBBERY"]
+rob=rob[['X','Y','Address','Date']]
+rob=rob.sort_values(by=['Date'],ascending=False)
+last7days=rob.Date.unique()[0:7]
+index=[]
+for i,j in rob['Date'].iteritems():
+    if(j in last7days):
+        index.append(i)
+map=folium.Map(location=[37.775421, -122.403405],zoom_start=12,tiles="OpenStreetMap")
+fg=folium.FeatureGroup(name="My Map")
+for i in index:
+    fg.add_child(folium.Marker(location=[rob['Y'][i],rob['X'][i]],popup=rob['Address'][i],icon=folium.Icon(color="green")))
+
+map.add_child(fg)
+map.save("rob.html")
+
+#3.For latest 15 days of data create One WebMap of Crimes which are categorized as FRAUD and GAMBLING. Change the icon to font awesome icon (http://fontawesome.io/icons/)
+rob=df[(df['Category']=="FRAUD") | (df['Category']=="GAMBLING")]
+rob=rob[['X','Y','Address','Date','Category']]
+rob=rob.sort_values(by=['Date'],ascending=False)
+last15days=rob.Date.unique()[0:15]
+index=[]
+for i,j in rob['Date'].iteritems():
+    if(j in last15days):
+        index.append(i)
+map=folium.Map(location=[37.775421, -122.403405],zoom_start=12,tiles="OpenStreetMap")
+fg=folium.FeatureGroup(name="My Map")
+iconName="https://fontawesome.com/icons/map-marker-alt?style=solid"
+for i in index:
+    if (rob['Category'][i] == "FRAUD"):
+        colorName="green"
+    else:
+        colorName="red"
+    fg.add_child(folium.Marker(location=[rob['Y'][i],rob['X'][i]],popup=rob['Category'][i],icon=folium.Icon(color=colorName)))
+
+map.add_child(fg)
+map.save("fraud.html")
+
