@@ -5,7 +5,7 @@ This Repository contains my Certification/practice programs.
 ### 1. Certifications
 This directory contains my completed or WIP(work in progress) ceritfications
 
-#### Completed 
+#### a. Completed 
 
 ```bash
 Python Programming Expert Certification : http://www.edureka.co/verify (Credential:
@@ -13,7 +13,7 @@ AYM9XBHS)
 Python Professional Certification : http://www.edureka.co/verify (Credential: X27634HN)
 ```
 
-#### WIP(Work in Progress) 
+#### b. WIP(Work in Progress) 
 
 ```bash
 Machine learning
