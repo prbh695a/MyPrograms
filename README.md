@@ -8,8 +8,9 @@ This directory contains my completed or WIP(work in progress) ceritfications
 #### Completed 
 
 ```bash
-Python Scripting Certification Project
-Python Programming Certification Course
+Python Programming Expert Certification : http://www.edureka.co/verify (Credential:
+AYM9XBHS)
+Python Professional Certification : http://www.edureka.co/verify (Credential: X27634HN)
 ```
 
 #### WIP(Work in Progress) 
