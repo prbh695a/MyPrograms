@@ -19,7 +19,7 @@ Y=df['Private']
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=.2,random_state=85)
 
 #3.Fit a linear svm from scikit learn and observe the accuracy.
-s=SVC()
+s=SVC(kernel='linear')
 s.fit(X_train,Y_train)
 Y_pred=s.predict(X_test)
 Y_pred_train=s.predict(X_train)
@@ -34,7 +34,7 @@ ss.fit(X_train)
 
 X_train=ss.transform(X_train)
 X_test=ss.transform(X_test)
-s=SVC()
+s=SVC(kernel='linear')
 s.fit(X_train,Y_train)
 Y_pred=s.predict(X_test)
 Y_pred_train=s.predict(X_train)
@@ -42,7 +42,7 @@ Y_pred_train=s.predict(X_train)
 print("The train accuracy score is: ",accuracy_score(Y_pred_train,Y_train))
 print("The test accuracy score is: ",accuracy_score(Y_pred,Y_test))
 
-print("\n The accuracy changed(increased) by almost 2 percent")
+print("\n The accuracy changed(increased) by almost 4 percent")
 
 #5.Use scikit learn’s gridsearch to select the best hyperparameter for a non-linear SVM,identify the model with best score and its parameters.
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=.2,random_state=85)
