@@ -1,4 +1,4 @@
-# PythonPractice
+# MyPrograms
 
 This Repository contains my Certification/practice programs.
 
