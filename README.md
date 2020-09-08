@@ -2,7 +2,7 @@
 
 This Repository contains my Certification/practice programs.
 
-### Certifications
+### 1. Certifications
 This directory contains my completed or WIP(work in progress) ceritfications
 
 #### Completed 
@@ -19,22 +19,22 @@ Python Professional Certification : http://www.edureka.co/verify (Credential: X2
 Machine learning
 ```
 
-### Practice
+### 2. Practice
 This directory contains my practice programs
 
-#### DataStructure 
+#### a. DataStructure 
 
 ```bash
 It contains basic practice program for data structure with python 
 ```
 
-#### Kubernetes
+#### b. Kubernetes
 
 ```bash
 My hands-on deployment file on minikube
 ```
 
-#### TensorFlow
+#### c. TensorFlow
 
 ```bash
 My hands-on TensorFlow
