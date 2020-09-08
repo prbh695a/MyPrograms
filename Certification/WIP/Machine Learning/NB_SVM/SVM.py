@@ -55,7 +55,7 @@ s=SVC()
 parameters=[{'C':[.1,1,10,100,1000],'kernel':['rbf']},
            {'C':[.1,1,10,100,1000],'kernel':['poly']}]
 gs=GridSearchCV(estimator=s,param_grid=parameters,
-               scoring='accuracy',cv=10,n_jobs=1)
+               scoring='accuracy',cv=10,n_jobs=-1)
 gd=gs.fit(X_train,Y_train)
 
 print(gd.best_score_)
