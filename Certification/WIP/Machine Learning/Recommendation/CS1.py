@@ -21,7 +21,11 @@ dsim= pairwise_distances(bookrating.values,metric='cosine')
 sim=1-dsim
 np.fill_diagonal(sim,0)
 user_simdf=pd.DataFrame(sim)
+
+#creating similar user dataframe
 sUser=pd.DataFrame(user_simdf.idxmax(axis=1),columns=['U1'])
+
+#mapping user to originals UID
 sUser['dummyUID']=pd.DataFrame({'dummyUID':genRange()})
 sUser['User1']=sUser['dummyUID'].map(newMap)
 sUser['User2']=sUser['U1'].map(newMap)
@@ -30,6 +34,8 @@ sUser=sUser.drop(['U1','dummyUID'],axis=1)
 findId=14
 print("We are finding recommendation for user id",findId)
 print("The recommendation for this user is book with title...")
+
+#finding similar user and its respective ISBN and then book title
 similarUser=sUser[sUser['User1']==findId]['User2'].values[0]
 recommend=dfRating[dfRating['user_id']==similarUser]
 for i,j in recommend['isbn'].iteritems():
