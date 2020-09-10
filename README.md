@@ -17,6 +17,7 @@ Python Professional Certification : http://www.edureka.co/verify (Credential: X2
 
 ```bash
 Machine learning
+DevOps - Jenkins, Ansible, Docker, Kubernetes
 ```
 
 ### 2. Practice
