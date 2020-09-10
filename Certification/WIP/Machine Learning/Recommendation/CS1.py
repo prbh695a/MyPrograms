@@ -6,9 +6,12 @@ dfRating=pd.read_csv("/Users/prateekb/Downloads/MyPrograms/Certification/WIP/Mac
                     encoding='latin-1')
 dfRating.drop_duplicates()
 dfRating=dfRating.head(10000)
+
+#taking only ISBN with digits
 dfRating=dfRating[dfRating['isbn'].str.isdigit()]
 dfRating['isbn']=dfRating['isbn'].astype('int')
 
+#Mapping users like 0:2,1:7 in current set
 newMap=pd.Series(sorted(dfRating['user_id'].unique())).to_dict()
 
 bookrating=dfRating.pivot(index='user_id',columns='isbn',values='rating').fillna(-999999)
