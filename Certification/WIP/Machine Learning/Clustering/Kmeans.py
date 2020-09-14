@@ -22,13 +22,6 @@ plt.plot(range(1,20), withinClusterDistance, marker='o')
 plt.xlabel('Number of clusters')
 plt.ylabel('Inertia')
 
-from sklearn.metrics import silhouette_samples,silhouette_score
-silhouette_score(clustering_data,kmeans.labels_)
-silhoutte_scores = []
-for cluster in range(2,20):
-    kmeans = KMeans(n_jobs = -1, n_clusters = cluster, init='k-means++')
-    kmeans.fit(clustering_data)
-    silhoutte_scores.append(silhouette_score(clustering_data,kmeans.labels_))
 
 kmeans=KMeans(n_clusters=2,n_init=15,max_iter=300,init='k-means++')
 kmeans.fit(clustering_data)
